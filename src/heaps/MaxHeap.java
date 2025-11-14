@@ -45,6 +45,14 @@ public class MaxHeap {
             heapify(arr, arr.length, i);
         }
         System.out.println("After building Min Heap: " + Arrays.toString(arr));
+
+        for(int i = arr.length-1;i>=0;i--){
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+            heapify(arr,i,0);
+        }
+        System.out.println("After building Min Heap: " + Arrays.toString(arr));
     }
 
     private void heapify(int[] arr, int n, int i) {
@@ -53,12 +61,12 @@ public class MaxHeap {
         int right = 2 * i + 2; // Right child index
 
         // If left child is smaller than the root
-        if (left < n && arr[left] < arr[smallest]) {
+        if (left < n && arr[left] > arr[smallest]) {
             smallest = left;
         }
 
         // If right child is smaller than the smallest so far
-        if (right < n && arr[right] < arr[smallest]) {
+        if (right < n && arr[right] > arr[smallest]) {
             smallest = right;
         }
 

@@ -27,9 +27,9 @@ public class KthLargestNumber {
         int largest = n;
         int left = 2 * n + 1;
         int right = 2 * n + 2;
-        if (left < length && nums[left] < nums[largest])
+        if (left < length && nums[left] > nums[largest])
             largest = left;
-        if (right < length && nums[right] < nums[largest])
+        if (right < length && nums[right] > nums[largest])
             largest = right;
         if (largest != n) {
             int swap = nums[largest];

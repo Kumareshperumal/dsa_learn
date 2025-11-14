@@ -9,8 +9,8 @@ public class KmpAlgo {
     }
 
     private static boolean kmpAlgorithm() {
-        String text = "abacaabccabacabaabb";
-        String pattern = "abccab";
+        String text = "abacaabccababacaabb";
+        String pattern = "ababaca";
         int[] lpsArray = getLpsMatching(pattern);
         int textPointer = 0, patternPointer = 0;
         while(textPointer < text.length()){

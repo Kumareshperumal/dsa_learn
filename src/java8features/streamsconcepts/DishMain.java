@@ -3,6 +3,7 @@ package java8features.streamsconcepts;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -47,6 +48,27 @@ public class DishMain {
         int totalCalories = menu.stream().mapToInt(Dish::getCalories).sum();
         System.out.println("Total Calories ? " + totalCalories);
         groupingByConcepts(dishes());
+        comparingDishes(menu);
+    }
+
+    private static void comparingDishes(List<Dish> menu) {
+        //compare using calories
+        Comparator<Dish> compareDishes = Comparator.comparing(Dish::getCalories);
+
+        Optional<Dish> maxDish = menu.stream()
+                                     .min(compareDishes);
+
+        maxDish.ifPresent(dish -> System.out.println("Max Dish : " + dish));
+
+       Double avg = menu.stream().collect(averagingInt(Dish::getCalories));
+        System.out.println("Avg dish calories : " + avg);
+
+         IntSummaryStatistics summaryStatistics = menu.stream().collect(Collectors.summarizingInt(Dish::getCalories));
+        System.out.println("Total Dishes count : " + summaryStatistics);
+
+        String shortMenu =menu.stream().map(Dish::getName).collect(joining(", "));
+        System.out.println("List of Menu name : " + shortMenu);
+
     }
 
     private static void groupingByConcepts(List<Dish> menu) {

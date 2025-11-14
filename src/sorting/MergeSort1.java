@@ -10,14 +10,15 @@ public class MergeSort1 {
 
     private static void mergeSort(int[] numbersArray) {
 
+        System.out.println("Before sorting " + Arrays.toString(numbersArray));
         int start = 0, end = numbersArray.length;
         mergeSort(start, end, numbersArray);
-        System.out.println(Arrays.toString(numbersArray));
+        System.out.println("After sorting " + Arrays.toString(numbersArray));
     }
 
     private static void mergeSort(int start, int end, int[] numbersArray) {
         if (start >= end - 1) return; // because end is exclusive.
-        int mid = (start + end) / 2;
+        int mid = start + ((end-start) / 2);
         mergeSort(start, mid, numbersArray);
         mergeSort(mid, end, numbersArray);
         merge(start, mid, end, numbersArray);

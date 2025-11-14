@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class HeapSort {
     public static void main(String[] args) {
         heapSorting();
-        int[] arr = {1, 2, 3,4};
+        int[] arr = {1, 2,3};
         generate(arr.length, arr);
     }
 
@@ -26,7 +26,7 @@ public class HeapSort {
             heapify(arr,i,0);
 
         }*/
-        for (int n = arrLength / 2 - 1; n >= 0; n--)
+        for (int n = arrLength / 2 - 1; n >= 0;     n--)
             heapify(arr, arrLength, n);
         for (int n = arrLength - 1; n > 0; n--) {
             //put the largest to the end.

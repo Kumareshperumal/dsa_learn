@@ -5,10 +5,12 @@ import java.util.Map;
 
 public class Anagram {
     public static void main(String[] args) {
+        System.out.println("Input1: anagram &&&& Input2 : nagaram ::::");
         String s="anagram", t = "nagaram";
         anagramSol(s,t);
         s = "car";
         t = "rat";
+        System.out.println("Input1 : car &&&& Input2 : rat ::::");
         anagramSol(s,t);
     }
 
@@ -16,19 +18,20 @@ public class Anagram {
 
         Map<Character,Integer> countS = new HashMap<>();
         for(char c : s.toCharArray()){
-            countS.computeIfPresent(c,(key, value) -> value+1);
-            countS.putIfAbsent(c, 1);
+            countS.put(c, countS.getOrDefault(c, 0)+1);
         }
         System.out.println(countS);
         if(s.length() != t.length()) return;
         System.out.println("length are same!");
         for(char c1: t.toCharArray()){
-            countS.computeIfPresent(c1,(key,value) -> value -1);
+            countS.put(c1, countS.getOrDefault(c1,0)-1);
         }
         System.out.println(countS);
         boolean allZero = countS.values().stream().allMatch(value -> value ==0);
+       boolean isZero = countS.values().stream().anyMatch(v -> v != 0);
         if(allZero) System.out.println("This is Anagram!!");
         else System.out.println("This is not an Anagram!!");
+        System.out.println("Is this Anagram ? " + !isZero);
 
     }
 }

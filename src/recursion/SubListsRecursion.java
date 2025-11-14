@@ -7,21 +7,46 @@ import java.util.List;
 public class SubListsRecursion {
     public static void main(String[] args) {
         List<String> input = new ArrayList<>(Arrays.asList("Jane", "Bob", "Matt", "Sara"));
-        sublists(input);
-        int[] inputs = new int[]{1,2,3};
+//        sublists(input);
+        List<Integer> inputs = new ArrayList<>(List.of(1,2,3));
         sublist(inputs);
     }
 
-    private static void sublist(int[] inputs) {
-        List output = new ArrayList();
-        List chosen = new ArrayList();
-        sublist(inputs,output,chosen);
+    private static void sublist(List<Integer> inputs) {
+        List output = new ArrayList<>();
+        List<Integer> chosen = new ArrayList<>();
+//        sublist(inputs,output,chosen);
+        System.out.println("Output : "+output);
+        int[] nums = new int[]{1,2,2};
+        Arrays.sort(nums);
+        sublist1(nums, new ArrayList<>(), 0);
     }
 
-    private static void sublist(int[] inputs, List output, List chosen) {
-        if(inputs.length == 0) output.add(new ArrayList<>(chosen));
+    private static void sublist1(int[] nums, ArrayList<Object> list, int p) {
+        System.out.println(" list : " + list +", pivot : " + p);
+        for(int i=p;i<nums.length;i++){
+            if(i>p && nums[i] == nums[i-1]) continue;
+            list.add(nums[i]);
+//            System.out.println(" list : " + list +", pivot : " + i);
+            sublist1(nums,list, i+1);
+            list.remove(list.size()-1);
+        }
+
+    }
+
+    private static void sublist(List<Integer> inputs, List output, List<Integer> chosen) {
+        System.out.println("Inputs : " + inputs + ", chosen : " + chosen);
+        if(inputs.isEmpty()) {
+            System.out.println(chosen);
+            output.add(new ArrayList<>(chosen));
+        }
         else{
-            int choose = inputs[0];
+           Integer c=  inputs.remove(0);
+            chosen.add(c);
+            sublist(inputs, output,chosen);
+            int exclude = chosen.remove(chosen.size()-1);
+            sublist(inputs,output,chosen);
+            inputs.add(exclude);
         }
     }
 
